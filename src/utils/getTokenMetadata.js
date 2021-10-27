@@ -16,13 +16,12 @@ const getTokenMetadata = async (address) => {
     const { JsonRpcProvider } = ethers.providers;
     const provider = new JsonRpcProvider(WEB3_ENDPOINT);
     const contract = new ethers.Contract(address, abi, provider);
-    const [name, symbol, decimals, totalSupply, tokenURI] = await Promise.all([
+    const [name, symbol, totalSupply, tokenURI] = await Promise.all([
         contract.name().catch(handleError),
         contract.symbol().catch(handleError),
-        contract.decimals().catch(handleError),
         contract.totalSupply().catch(handleError),
         contract.tokenURI(1).catch(handleError)
     ]);
-    return { decimals, name, symbol, totalSupply, tokenURI };
+    return { name, symbol, totalSupply, tokenURI };
 };
 module.exports = { getTokenMetadata };

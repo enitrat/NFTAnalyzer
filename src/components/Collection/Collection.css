@@ -1,7 +1,18 @@
 .twoTables{
     display:grid;
+    margin-right:10%;
+    margin-left:10%;
+    grid-template-columns: 33% 33% 33%;
+    grid-auto-rows: minmax(min-content, max-content);
+}
+
+.progressBarWrapper{
+    margin:10px;
+    display:grid;
     margin-right:25%;
     margin-left:25%;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: minmax(min-content, max-content);
+    grid-template-columns: 100%;
+    width:50%;
+    jusitfy-content:center;
+    align-items:center;
 }

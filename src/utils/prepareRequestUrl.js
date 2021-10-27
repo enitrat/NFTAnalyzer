@@ -32,7 +32,7 @@ const prepareURL = (baseURL, useIPFS) => {
         requestURL = `${baseURL}`
     }
     else {
-        requestURL = `http://127.0.0.1:8080/ipfs/${baseURL}`
+        requestURL = `https://ipfs.io/ipfs/${baseURL}`
     }
     console.log("base URL is " + baseURL);
     console.log("UseIPFS is " + useIPFS);

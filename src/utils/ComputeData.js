@@ -7,7 +7,7 @@
  * 
  * 
  */
-export function getCollectionData(metadata_array, collection_size) {
+export function ComputeCollectionData(metadata_array, collection_size) {
 
     let rarity_data = calc_collection_rarity(metadata_array, collection_size);
     calc_mint_rarity(metadata_array, rarity_data);
