@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react'
+import {
+  BrowserRouter as Router,
+  Link,
+  Route
+} from 'react-router-dom'
+import Collection from './components/Collection'
+import ContractForm from './components/ContractForm'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <React.Fragment>
+      <Route exact path="/">
+          <h1>NFT Analyzer</h1>
+		  <ContractForm/>
+        </Route>
+        <Route exact path="/:contractAddress">
+          <Collection/>
+        </Route>
+      </React.Fragment>
+    </Router>
+  )
 }
 
 export default App;
