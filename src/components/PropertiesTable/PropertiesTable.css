@@ -1,0 +1,107 @@
+.divProperties, .divRank {
+    margin: 10px;
+}
+
+h2 {
+    justify-self: center;
+    align-self: center;
+}
+
+.tableProperties {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    background-color: #001d32;
+    height: 450px;
+}
+
+.tableRank {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    background-color: #001d32;
+    height: 450px;
+}
+
+.tableProperties th {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+    color: white;
+    border-color: white;
+}
+
+.tableProperties td {
+    text-align: left;
+    padding: 1rem;
+}
+
+.tableProperties tr {
+    width: 100%;
+}
+
+.tableProperties tr:nth-child(even), .tableRank tr:nth-child(even) {
+    background: #002946
+}
+
+.tableProperties tr:hover, .tableRank tr:hover {
+    background-color: #0A335C;
+}
+
+.tableProperties tbody {
+    display: block;
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-y: hide;
+}
+
+.tableRank tbody {
+    /* Position */
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 800px;
+    overflow-y: scroll;
+    /* Decoration */
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.tableRank tr {
+    width: 100%;
+    display: flex;
+}
+
+.tableRank td, .tableRank th {
+    flex-basis: 100%;
+    flex-grow: 2;
+    display: block;
+    padding: 1rem;
+    text-align: center;
+}
+
+.tableProperties thead, .tableProperties tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Works on Chrome, Edge, and Safari */
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}

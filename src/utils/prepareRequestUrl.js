@@ -1,0 +1,42 @@
+
+const prepareRequestURL = async (URI) => {
+    console.log("URI is " + URI);
+    const { useIPFS, baseURL } = unwrapURLorHash(URI);
+    const requestURL = prepareURL(baseURL, useIPFS);
+    return requestURL;
+
+};
+
+
+function unwrapURLorHash(URI) {
+    console.log(URI);
+    var useIPFS = false;
+    var baseURL;
+    if (URI.includes("ipfs")) {
+        useIPFS = true;
+        // ipfs://QwhmlzzjrnlqkJEFkn/1
+        // => [ipfs://QwhmlzzjrnlqkJEFkn/1] => [QwhmlzzjrnlqkJEFkn/1] => QwhmlzzjrnlqkJEFkn
+        baseURL = URI.split("ipfs://")[1].split("/1")[0];
+    }
+    else {
+        //We'll always look for token number 1 in collection
+        //So the base URL without the accessed ressource will be without the /1
+        baseURL = URI.split("/1")
+    }
+    return { useIPFS, baseURL };
+};
+
+const prepareURL = (baseURL, useIPFS) => {
+    let requestURL;
+    if (!useIPFS) {
+        requestURL = `${baseURL}`
+    }
+    else {
+        requestURL = `http://127.0.0.1:8080/ipfs/${baseURL}`
+    }
+    console.log("base URL is " + baseURL);
+    console.log("UseIPFS is " + useIPFS);
+    return requestURL;
+};
+
+module.exports = { prepareRequestURL };

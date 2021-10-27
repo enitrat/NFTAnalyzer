@@ -1,0 +1,7 @@
+.twoTables{
+    display:grid;
+    margin-right:25%;
+    margin-left:25%;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: minmax(min-content, max-content);
+}
