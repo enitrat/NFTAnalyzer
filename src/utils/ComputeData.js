@@ -58,6 +58,9 @@ export function calc_collection_rarity(metadata_array, collection_size) {
 
         object.attributes.forEach((attribute) => {
 
+            //Start by "flattening" traits types and values for an easier further display
+            object[attribute.trait_type]=attribute.value;
+
             //if trait_type exists => increment number of occurences of the type
             let type = propertyToTrait.traits_types.find(o => o.name === attribute.trait_type);
             if (type !== undefined) {

@@ -132,7 +132,8 @@ function Collection() {
         else if (isLoading) {
             return (<h1>Loading data, please wait</h1>)
         }
-        else {
+        else if(nftDataArray!==undefined){
+            console.log(nftDataArray);
             return (
                 <div>
 
@@ -154,6 +155,9 @@ function Collection() {
 
                 </div>
             )
+        }
+        else{
+            return(<div></div>)
         }
 
     }

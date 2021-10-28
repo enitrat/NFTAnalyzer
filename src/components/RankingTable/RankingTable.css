@@ -8,12 +8,12 @@ h2 {
 }
 
 img {
-    width: 100%;
-    height: auto;
+    width: 150px;
+    height: 150px;
   }
 
 
-.tableRank {
+table {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -28,14 +28,14 @@ img {
 
 
 
-.tableRank tr:nth-child(even) {
+tr:nth-child(even) {
     background: #002946
 }
-.tableRank tr:hover {
+table tr:hover {
     background-color: #0A335C;
 }
 
-.tableRank tbody {
+tbody {
     /* Position */
     display: block;
     position: relative;
@@ -46,12 +46,12 @@ img {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.tableRank tr {
+tr {
     width: 100%;
     display: flex;
 }
 
-.tableRank td, .tableRank th {
+td, th {
     flex-basis: 100%;
     flex-grow: 2;
     display: block;
