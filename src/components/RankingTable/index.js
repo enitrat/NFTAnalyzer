@@ -1,21 +1,32 @@
 import styled from "styled-components";
 import "./RankingTable.css"
+import {useTable} from "react-table"
 
 const StyledLink = styled.a`
     color:#04BD01;
 `
 
-function RankingTable({ nftDataArray, contractAddress }) {
+function RankingTable({ properties, nftDataArray, contractAddress }) {
 
+        const tableInstance = 
 
+    console.log(properties);
     return (
         <div className="divSplitOne">
             <div className="divRank">
                 <table className="tableRank">
                     <thead>
                         <tr>
+                            <th>Image</th>
+                            <th>Name</th>
                             <th>Ranking</th>
-                            <th>Collection ID</th>
+                            {properties.map((property) =>
+
+                                <th>{property.name}</th>
+                            )
+                            }
+                            <th>Opensea Link</th>
+
                         </tr>
                     </thead>
                     <tbody className="tbodyRank">
@@ -29,8 +40,17 @@ function RankingTable({ nftDataArray, contractAddress }) {
                                 return (
                                     <tr>
                                         <td className="tdRank">
+                                            <div className="imgWrapper">
+                                                <img src={nft.image} />
+                                            </div>
+                                         </td>
+                                        <td className="tdRank">
+                                            {nft.name}
+                                        </td>
+                                        <td className="tdRank">
                                             {index + 1}
                                         </td>
+
                                         <td className="tdRank">
                                             <StyledLink href={url}>#{number}</StyledLink>
                                         </td>

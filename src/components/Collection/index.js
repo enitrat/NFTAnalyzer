@@ -76,12 +76,11 @@ function Collection() {
         const asyncTokenURIData = async () => {
             let res;
             const requestURL = await prepareRequestURL(tokenURI);
-            let tokenIDs = Array.from(Array(totalSupply + 1).keys())
+            let tokenIDs = Array.from(Array(10 + 1).keys())
             tokenIDs.shift();
             do {
                 res = prepareBatchToSend(tokenIDs);
                 let new_data = await sendRequests(requestURL, res.tokenIDs);
-                console.log(JSON.stringify(new_data[1]));
                 new_data.forEach((data) => {
                     metadata_array.push(data)
                 });
@@ -141,6 +140,8 @@ function Collection() {
                     <div className="progressBarWrapper">
                         <ProgressBar variant="success" animated now={progress} label={`${progress}%`} />
                     </div>
+                    <RankingTable properties={rarityData.traits_types} nftDataArray={nftDataArray} contractAddress={contractAddress} />
+
                     <div className="twoTables">
                         {
                             rarityData !== undefined && rarityData.traits_types.map((property) => {
@@ -150,7 +151,6 @@ function Collection() {
                             })
                         }
                     </div>
-                    <RankingTable nftDataArray={nftDataArray} contractAddress={contractAddress} />
 
                 </div>
             )

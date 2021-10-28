@@ -34,8 +34,6 @@ const prepareURL = (baseURL, useIPFS) => {
     else {
         requestURL = `https://ipfs.io/ipfs/${baseURL}`
     }
-    console.log("base URL is " + baseURL);
-    console.log("UseIPFS is " + useIPFS);
     return requestURL;
 };
 

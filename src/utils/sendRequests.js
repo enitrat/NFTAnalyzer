@@ -1,5 +1,6 @@
 const { ConcurrencyManager } = require("axios-concurrency");
 const axios = require("axios");
+const {getTokenImageURL} = require("./imageURL");
 
 
 
@@ -9,7 +10,6 @@ const MAX_CONCURRENT_REQUESTS = 30;
 
 
 async function sendRequests(requestURL, batchTokenIds) {
-    console.log(batchTokenIds);
     let new_data = [];
     let api = axios.create({
         baseURL: requestURL
@@ -23,18 +23,19 @@ async function sendRequests(requestURL, batchTokenIds) {
 
         //Get value field from response
         let values = validResults.map(a => a.value);
-
+        console.log(values);
 
         values.forEach((value) => {
             value.data["id"] = value.config.url.split('/').pop();
+            value.data.image=getTokenImageURL(value.data.image);
             new_data.push(value.data);
         })
-        console.log(new_data);
     } catch (err) { console.log(err); }
 
     manager.detach()
     return new_data;
 }
+
 
 
 module.exports = { sendRequests };
