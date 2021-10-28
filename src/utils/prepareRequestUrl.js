@@ -1,5 +1,6 @@
 
 export const prepareRequestURL = async (URI) => {
+    console.log(URI);
     const { useIPFS, baseURL } = unwrapURLorHash(URI);
     const requestURL = prepareURL(baseURL, useIPFS);
     return requestURL;
@@ -10,7 +11,7 @@ export const prepareRequestURL = async (URI) => {
 function unwrapURLorHash(URI) {
     var useIPFS = false;
     var baseURL;
-    if (URI.includes("ipfs")) {
+    if (URI.includes("ipfs://")) {
         useIPFS = true;
         // ipfs://QwhmlzzjrnlqkJEFkn/1
         // => [ipfs://QwhmlzzjrnlqkJEFkn/1] => [QwhmlzzjrnlqkJEFkn/1] => QwhmlzzjrnlqkJEFkn
