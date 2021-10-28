@@ -5,7 +5,7 @@ const WEB3_ENDPOINT = 'https://cloudflare-eth.com';
 const handleError = () => {
     return undefined;
 };
-const getTokenMetadata = async (address) => {
+export const getTokenMetadata = async (address) => {
     const abi = [
         'function name() view returns (string name)',
         'function symbol() view returns (string symbol)',
@@ -24,4 +24,3 @@ const getTokenMetadata = async (address) => {
     ]);
     return { name, symbol, totalSupply, tokenURI };
 };
-module.exports = { getTokenMetadata };

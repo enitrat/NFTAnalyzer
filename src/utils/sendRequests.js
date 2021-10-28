@@ -9,7 +9,7 @@ const MAX_CONCURRENT_REQUESTS = 30;
 
 
 
-async function sendRequests(requestURL, batchTokenIds) {
+export async function sendRequests(requestURL, batchTokenIds) {
     let new_data = [];
     let api = axios.create({
         baseURL: requestURL
@@ -37,7 +37,3 @@ async function sendRequests(requestURL, batchTokenIds) {
     manager.detach()
     return {new_data, failedInRequest};
 }
-
-
-
-module.exports = { sendRequests };

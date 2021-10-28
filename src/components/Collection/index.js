@@ -117,6 +117,7 @@ function Collection() {
             try {
                 asyncTokenURIData();
             } catch (err) {
+                console.log(err);
                 setError(true);
             }
         }

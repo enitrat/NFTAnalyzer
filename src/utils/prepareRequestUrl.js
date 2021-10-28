@@ -1,6 +1,5 @@
 
-const prepareRequestURL = async (URI) => {
-    console.log("URI is " + URI);
+export const prepareRequestURL = async (URI) => {
     const { useIPFS, baseURL } = unwrapURLorHash(URI);
     const requestURL = prepareURL(baseURL, useIPFS);
     return requestURL;
@@ -9,7 +8,6 @@ const prepareRequestURL = async (URI) => {
 
 
 function unwrapURLorHash(URI) {
-    console.log(URI);
     var useIPFS = false;
     var baseURL;
     if (URI.includes("ipfs")) {
@@ -21,7 +19,7 @@ function unwrapURLorHash(URI) {
     else {
         //We'll always look for token number 1 in collection
         //So the base URL without the accessed ressource will be without the /1
-        baseURL = URI.split("/1")
+        baseURL = URI.split("/1")[0];
     }
     return { useIPFS, baseURL };
 };
@@ -37,4 +35,3 @@ const prepareURL = (baseURL, useIPFS) => {
     return requestURL;
 };
 
-module.exports = { prepareRequestURL };
