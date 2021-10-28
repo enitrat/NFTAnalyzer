@@ -27,9 +27,12 @@ h2 {
     text-align: center;
     color: white;
     border-color: white;
+    border-bottom: solid 1px black;
+
 }
 
 .tableProperties td {
+    border-bottom: solid 1px black;
     text-align: left;
     padding: 1rem;
     width:100%;

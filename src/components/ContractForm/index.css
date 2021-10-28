@@ -1,20 +1,27 @@
 .contractInput {
-  position: relative;
-
+  border: none;
+  outline: none;
+  border: solid 2px grey;
   font-size: 1.5em;
-
-  background: linear-gradient(21deg, #023550, #067ca0);
-
-  padding: 3px;
-
+  background: transparent;
+  padding: 0px;
   display: inline-block;
+  border-radius: 10px;
+  transition: 0.5s;
+  color:white;
 
-  border-radius: 9999em;
 }
 
+.contractInput:focus {
+    border:none;
+    border-radius: 0px;
+    border-bottom: solid 2px grey;
+  transition: 0.5s;
+
+  }
 
 .centeredItem {
-    height:25%;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,9 +32,8 @@
   text-align: center;
 }
 
-
-.beginScan:link,
-.beginScan:visited {
+.mainButton:link,
+.mainButton:visited {
   border-radius: 20px;
   background: linear-gradient(to right, #1a7474 0%, #751581 100%);
 
@@ -38,7 +44,7 @@
   display: inline-block;
 }
 
-.beginScan:hover,
-.beginScan:active {
+.mainButton:hover,
+.mainButton:active {
   background: linear-gradient(to right, #30cfd0 0%, #db26f4 100%);
 }

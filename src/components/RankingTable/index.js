@@ -67,41 +67,48 @@ function Table({ columns, data }) {
       </table>
 
       <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {"<<"}
-        </button>{" "}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {"<"}
-        </button>{" "}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {">"}
-        </button>{" "}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {">>"}
-        </button>{" "}
-        <span>
+        <div className="paginationButtons">
+          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            {"First"}
+          </button>{" "}
+          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {"Previous"}
+          </button>{" "}
+          <button onClick={() => nextPage()} disabled={!canNextPage}>
+            {"Next"}
+          </button>{" "}
+          <button
+            onClick={() => gotoPage(pageCount - 1)}
+            disabled={!canNextPage}
+          >
+            {"Last"}
+          </button>{" "}
+        </div>
+        <div className="pageNumber">
           Page{" "}
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{" "}
-        </span>
-        <span>
-          | Go to page:{" "}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(page);
-            }}
-            style={{ width: "100px" }}
-          />
-        </span>{" "}
+        </div>
+        <div className="pageJump">
+          <span>
+            Go to page:{" "}
+            <input
+              type="number"
+              defaultValue={pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                gotoPage(page);
+              }}
+              style={{ width: "100px" }}
+            />
+          </span>{" "}
         <select
           value={pageSize}
           onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}
+          className="customSelect"
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
@@ -109,6 +116,7 @@ function Table({ columns, data }) {
             </option>
           ))}
         </select>
+        </div>
       </div>
     </div>
   );
@@ -146,7 +154,7 @@ function RankingTable({ properties, nftDataArray, contractAddress }) {
               return {
                 Header: property.name,
                 accessor: property.name,
-                Cell: ({ value }) => value===undefined ? "None" : value,
+                Cell: ({ value }) => (value === undefined ? "None" : value),
               };
             }),
           };
@@ -168,59 +176,6 @@ function RankingTable({ properties, nftDataArray, contractAddress }) {
   };
 
   return render();
-
-  /* return (
-        <div className="divSplitOne">
-            <div className="divRank">
-                <table className="tableRank">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Ranking</th>
-                            {properties.map((property) =>
-
-                                <th>{property.name}</th>
-                            )
-                            }
-                            <th>Opensea Link</th>
-
-                        </tr>
-                    </thead>
-                    <tbody className="tbodyRank">
-                        {
-                            nftDataArray !== undefined && nftDataArray.map((nft, index) => {
-                                //const number = nft.image.split('/').pop();
-                                //const number = nft.image.split(CID + '/')[1].split(".")[0] || nft.id
-                                const number = nft["id"];
-                                let url = `https://opensea.io/assets/${contractAddress}/${number}`;
-
-                                return (
-                                    <tr>
-                                        <td className="tdRank">
-                                            <div className="imgWrapper">
-                                                <img src={nft.image} />
-                                            </div>
-                                        </td>
-                                        <td className="tdRank">
-                                            {nft.name}
-                                        </td>
-                                        <td className="tdRank">
-                                            {index + 1}
-                                        </td>
-
-                                        <td className="tdRank">
-                                            <StyledLink href={url}>#{number}</StyledLink>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    ) */
 }
 
 export default RankingTable;

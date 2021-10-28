@@ -21,7 +21,7 @@ function ContractForm() {
         />
       </div>
       <div className="centeredItem">
-        <Link to={`/${contract}`} className = "beginScan">Scan collection</Link>
+        <Link to={`/${contract}`} className = "mainButton">Scan collection</Link>
       </div>
     </div>
   );

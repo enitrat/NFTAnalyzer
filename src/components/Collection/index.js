@@ -12,6 +12,7 @@ import { ComputeCollectionData } from '../../utils/ComputeData';
 import RankingTable from '../RankingTable';
 import PropertiesTable from '../PropertiesTable'
 import { Spinner, ProgressBar } from "react-bootstrap";
+import HomeButton from "../HomeButton";
 
 import './Collection.css'
 
@@ -136,7 +137,7 @@ function Collection() {
         else{
             return (
                 <div>
-
+                    <HomeButton/>
                     <CollectionInfo contractAddress={contractAddress} name={name} symbol={symbol} tokenURI={tokenURI} />
                     <div className="progressBarWrapper">
                         <ProgressBar variant="success" animated now={progress} label={`${progress}%`} />

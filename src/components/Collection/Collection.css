@@ -16,3 +16,10 @@
     jusitfy-content:center;
     align-items:center;
 }
+
+.backButton{
+    margin : 10px;
+    position:absolute;
+    top:0;
+    left:0
+}
