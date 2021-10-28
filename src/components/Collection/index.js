@@ -72,19 +72,20 @@ function Collection() {
     useEffect(() => {
         let metadata_array = [];
         let analyzed_size = 0;
-
+        let failed = 0;
         const asyncTokenURIData = async () => {
             let res;
             const requestURL = await prepareRequestURL(tokenURI);
-            let tokenIDs = Array.from(Array(10 + 1).keys())
+            let tokenIDs = Array.from(Array(totalSupply + 1).keys())
             tokenIDs.shift();
             do {
                 res = prepareBatchToSend(tokenIDs);
-                let new_data = await sendRequests(requestURL, res.tokenIDs);
+                let {new_data, failedInRequest} = await sendRequests(requestURL, res.tokenIDs);
+                failed+=failedInRequest;
                 new_data.forEach((data) => {
                     metadata_array.push(data)
                 });
-                analyzed_size = totalSupply - res.remaining;
+                analyzed_size = totalSupply - res.remaining -failed;
                 const { rarity_data, nftDataArray } = ComputeCollectionData(metadata_array, analyzed_size);
 
                 setProgress(100 - (res.remaining / totalSupply) * 100);
@@ -98,7 +99,7 @@ function Collection() {
 
 
         const prepareBatchToSend = (tokenIDs) => {
-            const BATCH_SIZE = 100;
+            const BATCH_SIZE = 200;
             let remaining;
             if (tokenIDs.length <= BATCH_SIZE) {
                 remaining = 0;
@@ -132,8 +133,7 @@ function Collection() {
         else if (isLoading) {
             return (<h1>Loading data, please wait</h1>)
         }
-        else if(nftDataArray!==undefined){
-            console.log(nftDataArray);
+        else{
             return (
                 <div>
 
@@ -156,9 +156,7 @@ function Collection() {
                 </div>
             )
         }
-        else{
-            return(<div></div>)
-        }
+     
 
     }
 

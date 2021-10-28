@@ -8,14 +8,14 @@ h2 {
 }
 
 img {
-    width: 150px;
-    height: 150px;
-  }
+    width: 100px;
+    height: 100px;
+}
 
-
-table {
+.tableRank{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
     border-collapse: collapse;
     border-radius: 1em;
     overflow: hidden;
@@ -26,36 +26,27 @@ table {
     height: 450px;
 }
 
+.tableRank thead{
+    display: table-header-group;
+}
 
-
-tr:nth-child(even) {
+.tableRank tr:nth-child(even) {
     background: #002946
 }
-table tr:hover {
+.tableRank tr:hover {
     background-color: #0A335C;
 }
 
-tbody {
-    /* Position */
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 800px;
-    overflow-y: scroll;
-    /* Decoration */
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+.tableRank tbody {
+
 }
 
-tr {
-    width: 100%;
-    display: flex;
+.tableRank tr {
 }
 
-td, th {
-    flex-basis: 100%;
-    flex-grow: 2;
-    display: block;
-    padding: 1rem;
+
+.tableRank td, th {
+    padding:1em;
     text-align: center;
 }
 

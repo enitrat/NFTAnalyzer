@@ -1,24 +1,30 @@
 import { useHistory } from "react-router-dom";
-import { useState } from "react"
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./index.css";
 
-function ContractForm(){
+function ContractForm() {
+  const [contract, setContract] = useState("");
+  const handleContractChange = (e) => {
+    setContract(e.target.value);
+  };
 
-
-    const [contract, setContract]=useState('');
-    const handleContractChange = (e) => {
-        setContract(e.target.value);
-    }
-
-
-
-    return (
-        <div>
-            <input type="text" name="contract" onChange={handleContractChange} />
-            <Link to={`/${contract}`}>Lien vers contract</Link>
-        </div>
-    )
+  return (
+    <div>
+      <div className="centeredItem">
+        <input
+          type="text"
+          name="contract"
+          onChange={handleContractChange}
+          placeholder="contract address"
+          className="contractInput"
+        />
+      </div>
+      <div className="centeredItem">
+        <Link to={`/${contract}`} className = "beginScan">Scan collection</Link>
+      </div>
+    </div>
+  );
 }
 
-
-export default ContractForm
+export default ContractForm;

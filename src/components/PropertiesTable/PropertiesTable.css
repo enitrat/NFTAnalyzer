@@ -55,20 +55,6 @@ h2 {
 }
 
 
-.tableRank tr {
-    width: 100%;
-    display: flex;
-}
-
-.tableRank td, .tableRank th {
-    flex-basis: 100%;
-    flex-grow: 2;
-    display: block;
-    padding: 1rem;
-    text-align: center;
-}
-
-
 /* Works on Chrome, Edge, and Safari */
 
 *::-webkit-scrollbar {
