@@ -22,5 +22,26 @@
     margin : 10px;
     position:absolute;
     top:0;
-    left:0
+    left:0;
+}
+
+.marginDiv{
+    margin:10px;
+}
+
+
+.filterButton{
+    margin:10px;
+    padding: 14px 25px;
+    border: none;
+  outline: none;
+  color: white;
+    border-radius: 20px;
+    background: linear-gradient(to right, #3083d0 0%, #7526f4 100%);
+
+}
+.mainButton:hover,
+.mainButton:active {
+  background: linear-gradient(to right, #30cfd0 0%, #db26f4 100%);
+
 }

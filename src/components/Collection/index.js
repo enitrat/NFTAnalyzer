@@ -26,6 +26,7 @@ function Collection() {
   //App states
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hideFilters, setHideFilters] = useState(false);
 
   //Metadata states
   const [name, setName] = useState("");
@@ -52,7 +53,7 @@ function Collection() {
     }
 
     /**
-     * 
+     *
      * @returns data from the smart contract
      */
     const asyncTokenMetadata = async () => {
@@ -80,7 +81,6 @@ function Collection() {
     };
     asyncTokenMetadata();
   }, []);
-
 
   useEffect(() => {
     let metadata_array = [];
@@ -114,7 +114,8 @@ function Collection() {
           metadata_array,
           analyzed_size
         );
-        if(failed>=100){
+
+        if (failed >= 100) {
           setProgress(100);
           return;
         }
@@ -122,11 +123,11 @@ function Collection() {
         setRarityData(rarity_data);
         setNftDataArray(nftDataArray);
         setIsLoading(false);
-      } while (res.remaining != 0 && failed<=100);
+      } while (res.remaining != 0 && failed <= 100);
     };
 
     /**
-     * 
+     *
      * @param {*} tokenIDs array of tokenIDs to analyze
      * @returns subArray of next batch to send and remaning amount
      */
@@ -143,7 +144,6 @@ function Collection() {
       return { tokenIDs: newBatch, remaining };
     };
 
-
     if (tokenURI !== "" && totalSupply !== 0) {
       try {
         console.log("hey");
@@ -155,7 +155,10 @@ function Collection() {
     }
   }, [tokenURI, totalSupply]);
 
-  
+  const toggleFilters = () => {
+    console.log(hideFilters);
+    setHideFilters(!hideFilters);
+  };
   const renderContent = () => {
     if (!isValid) {
       return <InvalidAddress />;
@@ -181,12 +184,31 @@ function Collection() {
               className="progressBar"
             />
           </div>
+          <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+            <button onClick={toggleFilters} className="filterButton">
+              {hideFilters ? (
+                <span>show filters</span>
+              ) : (
+                <span>hide filters </span>
+              )}
+            </button>
+          </div>
 
-          <div className="twoTables">
-            {rarityData !== undefined &&
-              rarityData.traits_types.map((property) => {
-                return <PropertiesTable property={property} filters={filters} setFilters ={setFilters}></PropertiesTable>;
-              })}
+          <div style={{ display: hideFilters ? "none" : "block" }}>
+            <div className="twoTables">
+              {rarityData !== undefined &&
+                rarityData.traits_types.map((property) => {
+                  return (
+                    <div className="marginDiv">
+                      <PropertiesTable
+                        property={property}
+                        filters={filters}
+                        setFilters={setFilters}
+                      ></PropertiesTable>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
 
           <RankingTable
@@ -195,8 +217,6 @@ function Collection() {
             contractAddress={contractAddress}
             filters={filters}
           />
-
-          
         </div>
       );
     }
