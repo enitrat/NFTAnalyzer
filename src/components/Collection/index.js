@@ -14,6 +14,8 @@ import PropertiesTable from "../PropertiesTable";
 import { Spinner, ProgressBar } from "react-bootstrap";
 import HomeButton from "../HomeButton";
 import LoadingData from "../LoadingData";
+import ErrorMessage from "../ErrorMessage";
+import InvalidAddress from "../InvalidAddress";
 
 import "./Collection.css";
 
@@ -45,6 +47,11 @@ function Collection() {
     } else {
       return;
     }
+
+    /**
+     * 
+     * @returns data from the smart contract
+     */
     const asyncTokenMetadata = async () => {
       try {
         const tokenMetadata = await getTokenMetadata(contractAddress);
@@ -54,6 +61,7 @@ function Collection() {
           return;
         }
         if (tokenMetadata.totalSupply === undefined) {
+          //sometimes it's impossible to read the totalSupply from the blockchain
           setTotalSupply(10000);
         } else {
           setTotalSupply(Number(tokenMetadata.totalSupply));
@@ -70,17 +78,20 @@ function Collection() {
     asyncTokenMetadata();
   }, []);
 
+
   useEffect(() => {
     let metadata_array = [];
     let analyzed_size = 0;
     let failed = 0;
 
+    /**
+     * Fetches the data and stores them in our states
+     */
     const asyncTokenURIData = async () => {
       let res;
       const requestURL = await prepareRequestURL(tokenURI);
       console.log(totalSupply);
       let tokenIDs = Array.from(Array(totalSupply + 1).keys());
-      console.log(tokenIDs);
       tokenIDs.shift();
       do {
         res = prepareBatchToSend(tokenIDs);
@@ -88,16 +99,18 @@ function Collection() {
           requestURL,
           res.tokenIDs
         );
+        //keep track of how many requests have failed to know how many
+        // nfts were analyzed
         failed += failedInRequest;
         new_data.forEach((data) => {
           metadata_array.push(data);
         });
+
         analyzed_size = totalSupply - res.remaining - failed;
         const { rarity_data, nftDataArray } = ComputeCollectionData(
           metadata_array,
           analyzed_size
         );
-
         setProgress(100 - (res.remaining / totalSupply) * 100);
         setRarityData(rarity_data);
         setNftDataArray(nftDataArray);
@@ -105,6 +118,11 @@ function Collection() {
       } while (res.remaining != 0);
     };
 
+    /**
+     * 
+     * @param {*} tokenIDs array of tokenIDs to analyze
+     * @returns subArray of next batch to send and remaning amount
+     */
     const prepareBatchToSend = (tokenIDs) => {
       const BATCH_SIZE = 200;
       let remaining;
@@ -117,6 +135,8 @@ function Collection() {
       remaining = tokenIDs.length;
       return { tokenIDs: newBatch, remaining };
     };
+
+
     if (tokenURI !== "" && totalSupply !== 0) {
       try {
         console.log("hey");
@@ -128,17 +148,17 @@ function Collection() {
     }
   }, [tokenURI, totalSupply]);
 
+  
   const renderContent = () => {
     if (!isValid) {
-      return <h1>Not a valid contract address</h1>;
+      return <InvalidAddress />;
     } else if (error) {
-      return <h1>There was an error fetching the NFT data</h1>;
+      return <ErrorMessage />;
     } else if (isLoading) {
       return <LoadingData />;
     } else {
       return (
         <div>
-          <HomeButton />
           <CollectionInfo
             contractAddress={contractAddress}
             name={name}
@@ -151,6 +171,7 @@ function Collection() {
               animated
               now={progress}
               label={`${progress}%`}
+              className="progressBar"
             />
           </div>
           <RankingTable

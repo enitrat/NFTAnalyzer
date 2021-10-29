@@ -4,6 +4,7 @@ import Collection from "./components/Collection";
 import ContractForm from "./components/ContractForm";
 import "./App.css";
 import Home from "./components/Home";
+import HomeButton from "./components/HomeButton";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/:contractAddress">
+          <HomeButton/>
           <Collection />
         </Route>
       </React.Fragment>

@@ -7,6 +7,20 @@
 
 .centeredTitle {
   display: flex;
+  margin-top: 100px;
   align-items: center;
   justify-content: center;
+}
+
+
+.bottomText{
+    position:absolute;
+    bottom:0;
+    left:0;
+    color:grey;
+    font-size: small;
+}
+
+.bottomText a{
+    color:grey;
 }

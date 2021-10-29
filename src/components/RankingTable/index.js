@@ -8,20 +8,13 @@ const StyledLink = styled.a`
 `;
 
 function Table({ columns, data }) {
-  // const tableInstance = useTable({ columns: columns, data: data });
-
-  // const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-  //   tableInstance;
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    page, // Instead of using 'rows', we'll use page,
-    // which has only the rows for the active page
-
-    // The rest of these things are super handy, too ;)
+    page,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -122,10 +115,8 @@ function Table({ columns, data }) {
   );
 }
 function RankingTable({ properties, nftDataArray, contractAddress }) {
-  //const nftData = useMemo(() => nftDataArray, [nftDataArray]);
   const nftData = nftDataArray;
 
-  console.log(nftDataArray);
   const dataColumns = useMemo(
     () =>
       ["image", "name", "id", "attributes"].map((key) => {

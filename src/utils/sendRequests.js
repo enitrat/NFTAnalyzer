@@ -28,6 +28,7 @@ export async function sendRequests(requestURL, batchTokenIds) {
         let values = validResults.map(a => a.value);
 
         values.forEach((value) => {
+            //We'll store the NFT id and the link to its image inside each object
             value.data["id"] = value.config.url.split('/').pop();
             value.data.image=getTokenImageURL(value.data.image);
             new_data.push(value.data);
