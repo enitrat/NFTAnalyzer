@@ -18,8 +18,15 @@ export function ComputeCollectionData(metadata_array, collection_size) {
   
   //Sorting our NFT array, so that each object is ordered by ascending score.
   //The higher the score, the rarer our NFT
-  metadata_array.sort((a, b) => b.rarity_score - a.rarity_score);
+  order_by_rank(metadata_array);
   return { rarity_data: rarity_data, nftDataArray: metadata_array };
+}
+
+function order_by_rank(metadata_array){
+  metadata_array.sort((a, b) => b.rarity_score - a.rarity_score);
+  metadata_array.forEach((object, index) => {
+    object["rank"]=index+1;
+  });
 }
 
 /**

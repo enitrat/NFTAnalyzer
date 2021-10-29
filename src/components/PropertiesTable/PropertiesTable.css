@@ -1,10 +1,15 @@
+:root {
+    --main-bg-color: #001d32;
+  }
+
 .divProperties {
     margin: 10px;
 }
 
-h2 {
+h3 {
     justify-self: center;
     align-self: center;
+    font-size: medium;
 }
 
 .tableProperties {
@@ -16,7 +21,7 @@ h2 {
     width: 100%;
     justify-self: center;
     align-self: center;
-    background-color: #001d32;
+    background: var(--main-bg-color);
     height: 450px;
 }
 
@@ -31,27 +36,39 @@ h2 {
 
 }
 
+.tableProperties thead{
+    display:table-header-group;
+}
+
 .tableProperties td {
     border-bottom: solid 1px black;
     text-align: left;
-    padding: 1rem;
+    padding: 1em;
     width:100%;
 }
 
-.tableProperties tr {
+.tableProperties tr{
     width: 100%;
+    background: var(--main-bg-color);
 }
 
 .tableProperties tr:nth-child(even){
-    background: #002946
+    filter:brightness(120%);
 }
 
-.tableProperties tr:hover{
-    background-color: #0A335C;
+.tableProperties .active {
+    background: linear-gradient(to right,var(--main-bg-color) 0%, #12755d 100%);
+    width: 100%;
 }
+
+.tableProperties .inactive:hover{
+    background: linear-gradient(to right,var(--main-bg-color) 0%, #12755d 100%);
+}
+
+
 
 .tableProperties tbody {
-    display: block;
+
     max-height: 400px;
     overflow-y: scroll;
     overflow-y: hide;

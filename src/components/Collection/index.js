@@ -41,6 +41,9 @@ function Collection() {
   //Handling errors
   const [error, setError] = useState(false);
 
+  //Filters to apply
+  const [filters, setFilters] = useState([]);
+
   useEffect(() => {
     if (isAddress(contractAddress)) {
       setIsValid(true);
@@ -111,11 +114,15 @@ function Collection() {
           metadata_array,
           analyzed_size
         );
+        if(failed>=100){
+          setProgress(100);
+          return;
+        }
         setProgress(100 - (res.remaining / totalSupply) * 100);
         setRarityData(rarity_data);
         setNftDataArray(nftDataArray);
         setIsLoading(false);
-      } while (res.remaining != 0);
+      } while (res.remaining != 0 && failed<=100);
     };
 
     /**
@@ -174,18 +181,22 @@ function Collection() {
               className="progressBar"
             />
           </div>
-          <RankingTable
-            properties={rarityData.traits_types}
-            nftDataArray={nftDataArray}
-            contractAddress={contractAddress}
-          />
 
           <div className="twoTables">
             {rarityData !== undefined &&
               rarityData.traits_types.map((property) => {
-                return <PropertiesTable property={property}></PropertiesTable>;
+                return <PropertiesTable property={property} filters={filters} setFilters ={setFilters}></PropertiesTable>;
               })}
           </div>
+
+          <RankingTable
+            properties={rarityData.traits_types}
+            nftDataArray={nftDataArray}
+            contractAddress={contractAddress}
+            filters={filters}
+          />
+
+          
         </div>
       );
     }
