@@ -54,7 +54,6 @@ function PropertiesTable({ property, filters, setFilters }) {
       setFilters(newFilters);
     }
   };
-  console.log(property.values);
   const columns = [
     {
       Header: `${property.name}`,
@@ -67,7 +66,6 @@ function PropertiesTable({ property, filters, setFilters }) {
     },
   ];
 
-  console.log(columns);
   return (<div>
 	  <Table data={property.values} columns={columns} triggerFilter={triggerFilter}/>
   </div>);

@@ -23,7 +23,6 @@ function Table({ columns, data, filters }) {
   //custom global filter function
   //returns row with a trait value included in the filter
   const ourGlobalFilterFunction = useCallback((rows) => {
-    console.log(filters);
     return rows.filter((row) => {
       return Object.values(row.values).some((r) => stringInArray(r));
     });

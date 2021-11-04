@@ -93,7 +93,6 @@ function Collection() {
     const asyncTokenURIData = async () => {
       let res;
       const requestURL = await prepareRequestURL(tokenURI);
-      console.log(totalSupply);
       let tokenIDs = Array.from(Array(totalSupply + 1).keys());
       tokenIDs.shift();
       do {
@@ -146,7 +145,6 @@ function Collection() {
 
     if (tokenURI !== "" && totalSupply !== 0) {
       try {
-        console.log("hey");
         asyncTokenURIData();
       } catch (err) {
         console.log(err);
@@ -156,7 +154,6 @@ function Collection() {
   }, [tokenURI, totalSupply]);
 
   const toggleFilters = () => {
-    console.log(hideFilters);
     setHideFilters(!hideFilters);
   };
   const renderContent = () => {
